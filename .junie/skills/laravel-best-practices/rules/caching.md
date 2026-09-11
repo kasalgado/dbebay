@@ -55,7 +55,7 @@ Repeated reads through the same memoized store avoid additional store lookups. W
 Tags group related entries for invalidation without tracking each key. Cache tags are not supported by the `file`, `dynamodb`, or `database` drivers; confirm support before choosing a store.
 
 ```php
-Cache::tags(['user-1'])->flush();
+Cache::tags(['users-1'])->flush();
 ```
 
 ## Use `Cache::add()` for Atomic Conditional Writes

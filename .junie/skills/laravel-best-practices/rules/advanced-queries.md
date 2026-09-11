@@ -54,7 +54,7 @@ $statuses = Feature::toBase()
 When a parent and its children are already loaded and code also accesses `$child->parent`, set the inverse relationship to the existing parent instance. This avoids an additional lazy-loading query for each child.
 
 ```php
-$feature->load('comments.user');
+$feature->load('comments.users');
 $feature->comments->each->setRelation('feature', $feature);
 ```
 

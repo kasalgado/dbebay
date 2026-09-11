@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('users.index');
     }
 
     /**
@@ -19,7 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -27,7 +29,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view('users.store');
     }
 
     /**
@@ -35,7 +37,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('users.show');
     }
 
     /**
@@ -43,7 +45,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('users.edit');
     }
 
     /**
@@ -51,7 +53,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return view('users.update');
     }
 
     /**
@@ -59,6 +61,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return view('users.destroy');
     }
 }

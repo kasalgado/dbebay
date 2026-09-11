@@ -29,8 +29,8 @@ public function show(Post $post): View
 Use scoped bindings when a nested resource must belong to its parent. This constrains model resolution; it does not replace authorization.
 
 ```php
-Route::get('/users/{user}/posts/{post}', function (User $user, Post $post) {
-    // The resolved post belongs to the resolved user.
+Route::get('/users/{users}/posts/{post}', function (User $user, Post $post) {
+    // The resolved post belongs to the resolved users.
 })->scopeBindings();
 ```
 
