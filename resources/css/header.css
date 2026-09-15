@@ -1,0 +1,130 @@
+.site-header {
+    width: 100%;
+    height: 78px;
+    background: #ffffff;
+    border-bottom: 5px solid #1cb1b1;
+    box-sizing: border-box;
+}
+
+.header-inner {
+    width: 90%;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo img {
+    width: 82px;
+    height: auto;
+    display: block;
+}
+
+.search-bar {
+    width: 300px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+
+    background: #ffffff;
+    border-radius: 20px;
+
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.search-input, .location-input {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.search-input {
+    width: 47%;
+    padding-left: 9px;
+}
+
+.location-input {
+    width: 36%;
+    padding-left: 5px;
+    border-left: 1px solid #dddddd;
+}
+
+.search-input input, .location-input input {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    font-family: Arial, sans-serif;
+    font-size: 7px;
+    color: #333333;
+    background: transparent;
+}
+
+.search-input input::placeholder, .location-input input::placeholder {
+    color: #777777;
+}
+
+.search-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+}
+
+.location-icon {
+    width: 13px;
+    height: 13px;
+    margin-right: 4px;
+}
+
+.search-button {
+    width: 72px;
+    height: 22px;
+    margin-right: 4px;
+    border: none;
+    border-radius: 15px;
+    background: #f82b1e;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background: #df2116;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    flex-shrink: 0;
+}
+
+.header-actions a {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-actions img {
+    width: 18px;
+    height: 18px;
+    display: block;
+}

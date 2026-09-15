@@ -7,7 +7,7 @@
 </head>
 <body>
     @include('layouts.header')
-    <main>@yield('content')</main>
+    <main style="margin: 20px 0;">@yield('content')</main>
     @include('layouts.footer')
 </body>
 </html>
