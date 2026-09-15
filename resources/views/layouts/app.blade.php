@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DBEBay</title>
+    <title>@yield('title', 'DBEBay')</title>
 </head>
 <body>
     @include('layouts.header')
