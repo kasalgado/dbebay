@@ -7,8 +7,10 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                'resources/css/app.css',
                 'resources/css/header.css',
                 'resources/css/footer.css',
+                'resources/css/card.css',
                 'resources/js/app.js',
             ],
             refresh: true,

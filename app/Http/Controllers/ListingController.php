@@ -45,7 +45,9 @@ class ListingController extends Controller
             'preis' => $request->preis,
         ]);
 
-        return redirect('/listings');
+        return redirect()
+            ->route('listings.index')
+            ->with('success', 'Das Listing wurde erstellt');
     }
 
     /**

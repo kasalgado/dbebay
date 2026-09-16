@@ -7,7 +7,10 @@
 </head>
 <body>
     @include('layouts.header')
-    <main style="margin: 20px 0;">@yield('content')</main>
+    <main style="margin: 20px 0;">
+        <x-flash-message></x-flash-message>
+        @yield('content')
+    </main>
     @include('layouts.footer')
 </body>
 </html>
