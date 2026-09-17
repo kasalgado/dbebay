@@ -53,7 +53,7 @@ $result = Str::of($input)->trim()->replace('_', '-')->lower();
 Use `Arr` for dot notation and common transformations:
 
 ```php
-$name = Arr::get($array, 'users.name', 'default');
+$name = Arr::get($array, 'user.name', 'default');
 $public = Arr::only($attributes, ['name', 'email']);
 ```
 

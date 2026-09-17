@@ -28,7 +28,7 @@ A route can return either a full view or a named fragment for clients such as ht
 
 ```php
 return view('dashboard', compact('users'))
-    ->fragmentIf($request->hasHeader('HX-Request'), 'users-list');
+    ->fragmentIf($request->hasHeader('HX-Request'), 'user-list');
 ```
 
 ## Share Parent Component Props with `@aware`
