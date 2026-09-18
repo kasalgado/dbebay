@@ -25,7 +25,9 @@ class ListingController extends Controller
      */
     public function create()
     {
-        return view('listings.create');
+        $categories = Category::all();
+
+        return view('listings.create', compact('categories'));
     }
 
     /**
@@ -60,7 +62,7 @@ class ListingController extends Controller
     {
         $categories = Category::all();
 
-        return view('listings.edit', compact(['listing','categories']));
+        return view('listings.edit', compact('listing','categories'));
     }
 
     /**
