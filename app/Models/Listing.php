@@ -11,15 +11,15 @@ class Listing extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'customer_id',
+        'user_id',
         'name',
         'beschreibung',
         'preis',
     ];
 
-    public function customer()
+    public function user()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(User::class);
     }
 
     public function images()
@@ -29,6 +29,11 @@ class Listing extends Model
 
     public function favoritedBy()
     {
-        return $this->belongsToMany(Customer::class, 'favorites');
+        return $this->belongsToMany(User::class, 'favorites');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

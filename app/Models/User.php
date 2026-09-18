@@ -17,6 +17,14 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $fillable = [
+        'plz',
+        'ort',
+        'strasse',
+        'hausnummer',
+        'telefonnummer',
+    ];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -28,5 +36,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function listings()
+    {
+        return $this->hasMany(Listing::class);
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Listing::class, 'favorites');
     }
 }

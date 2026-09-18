@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 
@@ -32,22 +33,16 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
             'beschreibung' => 'required',
             'preis' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
         ]);
+        $validatedData['customer_id'] = auth()->id();
+        Listing::create($validatedData);
 
-        Listing::create([
-            'customer_id' => auth()->id() || $request->customer_id,
-            'name' => $request->name,
-            'beschreibung' => $request->beschreibung,
-            'preis' => $request->preis,
-        ]);
-
-        return redirect()
-            ->route('listings.index')
-            ->with('success', 'Das Listing wurde erstellt');
+        return redirect()->route('listings.index')->with('success', 'Artikel erfolgreich erstellt!');
     }
 
     /**
@@ -63,7 +58,9 @@ class ListingController extends Controller
      */
     public function edit(Listing $listing)
     {
-        return view('listings.edit', compact('listing'));
+        $categories = Category::all();
+
+        return view('listings.edit', compact(['listing','categories']));
     }
 
     /**

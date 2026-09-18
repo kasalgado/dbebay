@@ -2,7 +2,7 @@
 
 <header class="site-header">
     <div class="header-inner">
-        <a href="#" class="logo">
+        <a href="{{ route('listings.index') }}" class="logo">
             <img src="{{ asset('img/logo.svg') }}" alt="DBEbay">
         </a>
         <div class="search-bar">
@@ -21,7 +21,7 @@
             </button>
         </div>
         <nav class="header-actions" aria-label="Benutzermenü">
-            <a href="#" aria-label="Profil">
+            <a href="{{ route('login') }}" aria-label="Profil">
                 <img src="{{ asset('img/profile.svg') }}" alt="">
             </a>
 
