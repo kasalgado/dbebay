@@ -5,6 +5,7 @@
     <h1 class="text-2xl font-semibold mb-10">Listing bearbeiten</h1>
     <form action="{{ route('listings.update', $listing->id) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="grid grid-cols-[1fr_2fr] gap-4 mb-2">
             <label>Name:</label>
             <input type="text" name="name" value="{{ $listing->name }}" required>

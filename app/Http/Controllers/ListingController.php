@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Listing;
+use App\Models\ListingImage;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
@@ -39,12 +40,28 @@ class ListingController extends Controller
             'name' => 'required',
             'beschreibung' => 'required',
             'preis' => 'required|numeric',
-            'category_id' => 'required|exists:categories,id',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        $validatedData['customer_id'] = auth()->id();
-        Listing::create($validatedData);
+        $listing = Listing::create([
+            'user_id' => auth()->id(),
+            'name' => $validatedData['name'],
+            'beschreibung' => $validatedData['beschreibung'],
+            'preis' => $validatedData['preis'],
+        ]);
 
-        return redirect()->route('listings.index')->with('success', 'Artikel erfolgreich erstellt!');
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('listing_images', 'public');
+                ListingImage::create([
+                    'listing_id' => $listing->id,
+                    'image_path' => $path,
+                ]);
+            }
+        }
+
+        return redirect()
+            ->route('listings.index')
+            ->with('success', 'Artikel erfolgreich erstellt!');
     }
 
     /**

@@ -19,7 +19,7 @@
                     </div>
                     <div class="main-image">
                         <img
-                            src="{{ asset('storage/listing_images/'.$listing->images[0]->image_path) }}"
+                            src="{{ asset('storage/'.$listing->images[0]->image_path) }}"
                             alt="{{ $listing->name }}"
                         />
                     </div>
