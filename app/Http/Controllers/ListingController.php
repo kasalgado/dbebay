@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Listing;
 use App\Models\ListingImage;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
@@ -14,11 +15,70 @@ class ListingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $listings = Listing::latest()->get();
+        $query = Listing::query();
 
-        return view('listings.index', compact('listings'));
+        // Join mit Users-Tabelle, um nach Standort zu filtern
+        $query->join('users', 'listings.user_id', '=', 'users.id');
+
+        // Filter nach Kategorie
+        if ($request->filled('category')) {
+            $query->where('category_id', (int) $request->category);
+        }
+
+        if ($request->filled('search')) {
+            $searchTerm = '%' . $request->search . '%';
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('listings.name', 'LIKE', $searchTerm)
+                    ->orWhere('listings.beschreibung', 'LIKE', $searchTerm);
+            });
+        }
+
+        // Filter nach Standort
+        if ($request->filled('location')) {
+            $query->where('users.ort', $request->location);
+        }
+
+        // Suche nach Ort
+        if ($request->filled('search_location')) {
+            $query->where('users.ort', 'LIKE', '%' . $request->search_location . '%');
+        }
+
+        // Filter nach Preisbereich
+        if ($request->filled('min_price') && is_numeric($request->min_price)) {
+            $query->where('preis', '>=', (float) $request->min_price);
+        }
+        if ($request->filled('max_price') && is_numeric($request->max_price)) {
+            $query->where('preis', '<=', (float) $request->max_price);
+        }
+
+        // Preisbereich-Filter
+        if ($request->filled('price_range')) {
+            if (str_ends_with($request->price_range, '+')) {
+                $minPrice = (float) rtrim($request->price_range, '+');
+                $query->where('preis', '>=', $minPrice);
+            } else {
+                // String "20-50" in zwei Werte zerlegen
+                $prices = explode('-', $request->price_range);
+
+                if (count($prices) == 2) {
+                    $minPrice = (float) $prices[0];
+                    $maxPrice = (float) $prices[1];
+
+                    $query->whereBetween('preis', [$minPrice, $maxPrice]);
+                }
+            }
+        }
+
+        $locations = User::select('ort')->distinct()->pluck('ort');
+        $listings = $query->orderBy('listings.created_at', 'desc')
+            ->select('listings.*')
+            ->paginate(15)
+            ->appends($request->all());
+        $categories = Category::all();
+
+        return view('listings.index', compact('listings', 'categories', 'locations'));
     }
 
     /**
