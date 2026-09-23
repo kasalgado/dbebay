@@ -1,6 +1,6 @@
 <header class="w-full bg-white border-b-4 border-teal-500 shadow-sm">
     <div class="w-[90%] max-w-[1200px] mx-auto h-20 flex items-center justify-between gap-4 md:gap-8">
-        <a href="{{ route('listings.index') }}" class="flex items-center shrink-0 hover:opacity-90 transition-opacity">
+        <a href="{{ url('/dashboard') }}" class="flex items-center shrink-0 hover:opacity-90 transition-opacity">
             <img src="{{ asset('img/logo.svg') }}" alt="DBEbay" class="h-10 w-auto">
         </a>
 
@@ -42,11 +42,17 @@
         </form>
 
         <nav class="flex items-center gap-3 shrink-0" aria-label="Benutzermenü">
-            <a href="{{ route('profile') }}" aria-label="Profil" class="p-2 text-gray-600 hover:text-teal-600 hover:bg-gray-100 rounded-full transition-colors" title="Profil">
-                <img src="{{ asset('img/profile.svg') }}" alt="" class="w-5 h-5">
-            </a>
+            @auth
+                <a href="{{ url('/profil') }}" aria-label="Profil" class="p-2 text-gray-600 hover:text-teal-600 hover:bg-gray-100 rounded-full transition-colors" title="Profil">
+                    <img src="{{ asset('img/profile.svg') }}" alt="" class="w-5 h-5">
+                </a>
+            @else
+                <a href="{{ url('/login') }}" aria-label="Login" class="p-2 text-gray-600 hover:text-teal-600 hover:bg-gray-100 rounded-full transition-colors" title="Login">
+                    <img src="{{ asset('img/profile.svg') }}" alt="" class="w-5 h-5">
+                </a>
+            @endauth
 
-            <a href="{{ route('listings.create') }}" aria-label="Meine Anzeigen" class="p-2 text-gray-600 hover:text-teal-600 hover:bg-gray-100 rounded-full transition-colors" title="Meine Anzeigen">
+            <a href="{{ url('/listings/create') }}" aria-label="Meine Anzeigen" class="p-2 text-gray-600 hover:text-teal-600 hover:bg-gray-100 rounded-full transition-colors" title="Meine Anzeigen">
                 <img src="{{ asset('img/create_listing.svg') }}" alt="" class="w-5 h-5">
             </a>
 

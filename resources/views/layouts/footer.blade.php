@@ -3,7 +3,9 @@
 <footer class="site-footer">
     <div class="footer-inner">
         <div class="footer-brand">
-            <img src="{{ asset('img/logo.svg') }}" alt="DBEbay">
+            <a href="{{ url('/dashboard') }}" class="inline-block hover:opacity-90 transition-opacity">
+                <img src="{{ asset('img/logo.svg') }}" alt="DBEbay">
+            </a>
         </div>
         <div class="footer-column">
             <h3>Unternehmen</h3>
