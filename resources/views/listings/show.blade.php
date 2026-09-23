@@ -56,7 +56,16 @@
                     </div>
                     <button class="favorite-button" type="button">
                         <span>♡</span>
-                        Zu Favoriten hinzufügen
+                        <form action="{{ route('listings.favorite', $listing->id) }}" method="POST">
+                            @csrf
+                            <button type="submit">
+                                @if(auth()->user() && auth()->user()->favorites->contains($listing->id))
+                                    <img src="{{ asset('img/heart-filled.svg') }}" alt=""> Aus Favoriten entfernen
+                                @else
+                                    <img src="{{ asset('img/heart.svg') }}" alt=""> Zu Favoriten hinzufügen
+                                @endif
+                            </button>
+                        </form>
                     </button>
                 </aside>
             </section>

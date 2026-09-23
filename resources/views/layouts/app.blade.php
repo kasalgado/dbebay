@@ -12,9 +12,6 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.header')
-            @auth
-                @include('layouts.navigation')
-            @endauth
             <main class="content-inner">
                 <x-flash-message></x-flash-message>
                 @yield('content')

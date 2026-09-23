@@ -8,7 +8,9 @@ use App\Models\Category;
 use App\Models\Listing;
 use App\Models\ListingImage;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ListingController extends Controller
 {
@@ -166,5 +168,18 @@ class ListingController extends Controller
         $listing->delete();
 
         return redirect('/listings');
+    }
+
+    public function toggleFavorite($id): RedirectResponse {
+        $user = Auth::user();
+        $listing = Listing::findOrFail($id);
+
+        if ($user->favorites()->where('listing_id', $id)->exists()) {
+            $user->favorites()->detach($listing);
+        } else {
+            $user->favorites()->attach($listing);
+        }
+
+        return redirect()->back();
     }
 }

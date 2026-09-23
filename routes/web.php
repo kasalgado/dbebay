@@ -22,5 +22,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [ListingController::class, 'index']);
 Route::resource('listings', ListingController::class)->middleware('auth');
 Route::resource('users', UserController::class);
+Route::post('/listings/{id}/favorite', [ListingController::class, 'toggleFavorite'])
+    ->middleware('auth')
+    ->name('listings.favorite');
 
 require __DIR__.'/auth.php';

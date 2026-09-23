@@ -42,7 +42,7 @@
         </form>
 
         <nav class="flex items-center gap-3 shrink-0" aria-label="Benutzermenü">
-            <a href="{{ route('login') }}" aria-label="Profil" class="p-2 text-gray-600 hover:text-teal-600 hover:bg-gray-100 rounded-full transition-colors" title="Profil">
+            <a href="{{ route('profile') }}" aria-label="Profil" class="p-2 text-gray-600 hover:text-teal-600 hover:bg-gray-100 rounded-full transition-colors" title="Profil">
                 <img src="{{ asset('img/profile.svg') }}" alt="" class="w-5 h-5">
             </a>
 
@@ -50,7 +50,7 @@
                 <img src="{{ asset('img/create_listing.svg') }}" alt="" class="w-5 h-5">
             </a>
 
-            <a href="#" aria-label="Favoriten" class="p-2 text-gray-600 hover:text-teal-600 hover:bg-gray-100 rounded-full transition-colors" title="Favoriten">
+            <a href="{{ route('listings.index') }}" aria-label="Favoriten" class="p-2 text-gray-600 hover:text-teal-600 hover:bg-gray-100 rounded-full transition-colors" title="Favoriten">
                 <img src="{{ asset('img/heart.svg') }}" alt="" class="w-5 h-5">
             </a>
         </nav>
