@@ -22,6 +22,10 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', [ListingController::class, 'index']);
 Route::resource('listings', ListingController::class)->middleware('auth');
+Route::post('/listings/{listing}/images', [ListingController::class, 'updateImages'])
+    ->middleware('auth')->name('listings.images.update');
+Route::delete('/listings/images/{image}', [ListingController::class, 'deleteImage'])
+    ->middleware('auth')->name('listings.images.delete');
 Route::resource('users', UserController::class);
 Route::post('/listings/{id}/favorite', [ListingController::class, 'toggleFavorite'])
     ->middleware('auth')

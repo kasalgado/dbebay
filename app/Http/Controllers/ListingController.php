@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ListingController extends Controller
 {
@@ -181,5 +182,38 @@ class ListingController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function updateImages(Request $request, Listing $listing)
+    {
+        $request->validate([
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('listing_images', 'public');
+                ListingImage::create([
+                    'listing_id' => $listing->id,
+                    'image_path' => $path,
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Bilder wurden aktualisiert!');
+    }
+
+    public function deleteImage($imageId)
+    {
+        $image = ListingImage::findOrFail($imageId);
+        $listing = $image->listing;
+
+        if ($listing->images->count() > 1) {
+            Storage::disk('public')->delete($image->image_path); // Bilddatei löschen
+            $image->delete(); // Datenbankeintrag löschen
+            return redirect()->back()->with('success', 'Bild wurde gelöscht.');
+        }
+
+        return redirect()->back()->with('error', 'Mindestens ein Bild muss erhalten bleiben.');
     }
 }
